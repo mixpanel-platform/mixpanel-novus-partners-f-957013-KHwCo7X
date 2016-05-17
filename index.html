@@ -9,7 +9,16 @@
   <body class="mixpanel-platform-body">
     <h1>Hello, World!</h1>
     <script>
-      // Run queries and display results here
+      var params = {from: moment(), to: moment()}
+      console.log(params);
+      MP.api.jql(
+        function main() {
+          return Events({from_date: params.from, to_date: params.to})
+          .filter(function(e){ return e.name == "*Percentage Actives by Account Exec"});  
+        }
+      ).done(function(results) {
+        console.log(results);
+      })
     </script>
   </body>
 </html>
